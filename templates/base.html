@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title></title>
+<link rel="stylesheet" href="/static/zd-1.0.css">
+        {% block css %}
+
+        {% endblock  %}
+        {% block js %}
+
+        {% endblock  %}
+</head>
+<body>
+<nav>
+
+	<!-- logo -->
+	<div class="nav-logo">
+		<a><img src="/static/homepage/images/logo.jpg" alt=""></a>
+	</div>
+
+	<!-- 控制menu -->
+	<div class="nav-menu">
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+
+	<!-- 菜单 -->
+	<ul class="nav-list">
+
+		<li><a href="/home">首页</a></li>
+		<li><a href="/Project">老师项目</a></li>
+		<li><a href="/Market">二手市场</a></li>
+		<li><a href="/Problem">讨论区</a></li>
+        <li><a href="/User">个人中心</a></li>
+        <li><a href="/User/logout">退出登录</a></li>
+		<li>
+		<a href="" class="active">{{username}}</a>
+		<ul class="menu">
+		</ul>
+		</li>
+
+	</ul>
+</nav>
+{% block  content %}
+
+{% endblock %}
+</body>
+</html>
+
+

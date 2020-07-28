@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+    {% block css %}
+	    <link rel="shortcut icon" href="/static/Market/images/favicon.ico">
+		<link rel="stylesheet" href="/static/Market/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="/static/Market/css/style.css">
+     {% endblock %}
+    {% block js %}
+		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    {% endblock %}
+    {% block content %}
+	<body>
+	<section class="cta text-center">
+			<div class="container">
+				<h3 class="mt-0 mb-4" id="top">搜索你需要的商品</h3>
+					<form class="subscribe" method="get" action="/Market/search/">
+                    {% csrf_token %}
+					<div class="form-group row pt-3">
+						<div class="col-sm-8 mb-3">
+							<input type="search" class="form-control" name="q" placeholder="商品关键字">
+						</div>
+						<div class="col-sm-4">
+							<button type="submit" class="btn btn-lg btn-outline-primary" >搜索</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</section>
+
+		<section class="featured-block text-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 text-center">
+						<div class="product-image mt-3">
+							<img class="img-fluid" id="img1" src="{{ MEDIA_URL }}{{ market_obj.photo1 }}">
+						</div>
+						<div class="product-thumbnails"><a href="#">
+							<img class="mt-2 mr-2 img-fluid" id="1" src="{{ MEDIA_URL }}{{ market_obj.photo1 }}" ></a>
+							<a href="#">
+								<img class="mt-2 mr-2 img-fluid" id="2" src="{{ MEDIA_URL }}{{ market_obj.photo2 }}" ></a>
+							<a href="#">
+								<img class="mt-2 mr-2 img-fluid" id="3" src="{{ MEDIA_URL }}{{ market_obj.photo3 }}" ></a>
+							</div>
+					</div>
+					<div class="col-md-6 mt-5 mt-md-2 text-center text-md-left">
+						<h2 class="mb-3 mt-0">商品名称:{{market_obj.title}}</h2>
+						<p class="lead mt-2 mb-3 primary-color">${{market_obj.prices}}</p>
+                        <h5 class="mt-4">使用时间:{{ market_obj.time }}</h5>
+                        <h5 class="mt-4">发布人:{{ market_obj.author }}</h5>
+                        <h5 class="mt-4">联系电话:{{ market_obj.tel }}</h5>
+						<h5 class="mt-4">商品简介</h5>
+						<p>{{ market_obj.content }}</p>
+
+
+						
+						<!--Quantity: <input type="text" class="form-control quantity mb-4" name="" value="1">-->
+						
+						</div>
+				</div>
+			</div>
+			</div>
+		</section>
+		
+		<div class="divider"></div>
+		
+		<section class="products text-center">
+			<div class="container">
+				<h3 class="mb-4">相似商品</h3>
+				<div class="row">
+                    {% for market in market_list %}
+					<div class="col-sm-6 col-md-3 col-product">
+						<figure>
+                            <a href="/Market/detail/{{ market.id }}" title="More Info">
+							<img class="rounded-corners img-fluid" src="{{ MEDIA_URL }}{{ market.photo1 }}"	width="240" height="240">
+							<figcaption>
+								<div class="thumb-overlay">
+									<i class="fas fa-search-plus"></i>
+							</div>
+							</figcaption>
+                            </a>
+						</figure>
+						<h4><a href="#">{{market.title}}</a></h4>
+						<p><span class="emphasis">${{market.prices}}</span></p>
+					</div>
+                    {% endfor %}
+				</div>
+			</div>
+		</section>
+
+		<script src="/static/Market/js/jquery-3.1.1.min.js"></script>
+		<script src="/static/Market/bootstrap/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+		<script type="text/javascript">
+            window.onload=function(){
+                var btn1=document.getElementById("1");
+                var btn2=document.getElementById("2");
+                var btn3=document.getElementById("3");
+                var img=document.getElementById("img1");
+                var imgarr=["{{ MEDIA_URL }}{{ market_obj.photo1 }}","{{ MEDIA_URL }}{{ market_obj.photo2 }}","{{ MEDIA_URL }}{{ market_obj.photo3 }}"];
+                btn1.onclick=function(){
+                    img.src=imgarr[0];
+                };
+                btn2.onclick=function(){
+                    img.src=imgarr[1];
+                };
+                btn3.onclick=function(){
+                    img.src=imgarr[2];
+                };
+            };
+        </script>
+	</body>
+    {% endblock %}

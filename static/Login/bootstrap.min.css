@@ -1,0 +1,112 @@
+body{
+	font-size:14px;
+	background-image: url("images/58fd5c6f90fdf.jpg");
+	height: 100%;
+	width: 100%;
+	background-size:cover ;
+	position: absolute;
+	overflow: hidden;
+		}
+	.form {
+	  position: absolute;
+	  z-index: 1;
+	  background: rgba(255,255,255,0.5);
+	  width: 300px;
+		top: 15%;
+	    left: 70%;
+		text-align: center;
+	  padding: 45px;
+	  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+	 }
+
+	.form h1 button{
+		background: #2E4045;
+	  	border: 0;
+	  	padding: 15px;
+	  	color: #FFFFFF;
+	  	border-radius:15px;
+		position:relative;
+		left:55px;
+		text-align: center;
+		width: 35%;
+		text-shadow:0 0 5px #ccc;
+	}
+	.form h1 span{
+		position:relative;
+		left:-55px;
+		top: 14px;
+		font-size: 40px;
+		text-align: center;
+		color:#2E4045;
+		text-shadow:0 0 5px #ccc;
+	}
+	.form input {
+	  background: #f2f2f2;
+	  border: 0;
+	  margin: 0 0 15px;
+	  padding: 15px;
+	  box-sizing: border-box;
+	  border-radius:15px;
+		left: 30%;
+	}
+	.login_button{
+	  background: #2E4045;
+	  width: 30%;
+	  border: 0;
+	  padding: 15px;
+	  color: #FFFFFF;
+	  border-radius:15px;
+		position: relative;
+		right: 20px;
+	}
+	.register_button{
+	  background: #2E4045;
+	  width: 30%;
+	  border: 0;
+	  padding: 15px;
+	  color: #FFFFFF;
+	  border-radius:15px;
+		position: relative;
+		left: 20px;
+	}
+	.register_form {
+	  position: absolute;
+	  z-index: 1;
+	  background: rgba(255,255,255,0.5);
+	  width: 300px;
+		top: 10%;
+	    left: 40%;
+		text-align: center;
+	  padding: 45px;
+	  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+	 }
+	.register_form button{
+		background: #2E4045;
+	  	border: 0;
+	  	padding: 15px;
+	  	color: #FFFFFF;
+	  	border-radius:15px;
+		position:relative;
+		left:55px;
+		text-align: center;
+		width: 35%;
+		text-shadow:0 0 5px #ccc;
+	}
+	.register_form input {
+	  background: #f2f2f2;
+	  border: 0;
+	  margin: 0 0 15px;
+	  padding: 15px;
+	  box-sizing: border-box;
+	  border-radius:15px;
+		left: 30%;
+	}
+	.register_form h1 span{
+		position:relative;
+		left:-55px;
+		top: 14px;
+		font-size: 40px;
+		text-align: center;
+		color:#2E4045;
+		text-shadow:0 0 5px #ccc;
+	}

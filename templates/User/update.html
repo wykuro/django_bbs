@@ -1,0 +1,139 @@
+﻿{%  extends 'base.html' %}
+{% block css %}
+    <link href="../../static/User/css/UserCSS.css" rel="stylesheet" type="text/css" />
+    <link href="../../static/User/css/style.css" rel="stylesheet" type="text/css" />
+    <style>
+    .red{
+        color: red;
+        position: relative;
+        left: 330px;
+        font-size: 15px;
+    }
+    </style>
+{% endblock %}
+{% block js %}
+
+
+
+{% endblock %}
+{% block content %}
+<body>
+    <div class="row" style="margin-top: 10px;">
+    </div>
+    <div class="row">
+        <div class="u-menu">
+            <ul class="u-nav" id="user_menu">
+                <li class="item" id="user_menu_my" name="user_menu_my">
+                    <h3 class="t1">
+                        我的信息<span ></span></h3>
+                    <ul class="sub">
+                        <li><a  href="/User">个人主页</a></li>
+                        <li><a  href="/User/update">信息管理</a> </li>
+                        <li><a  href="/Market/user_market">市场管理</a></li>
+                        <li><a  href="/Project/user_project">项目管理</a></li>
+                        <li><a  href="/Problem/user_problem">讨论管理</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+
+        </div>
+        <!-- /.u-menu -->
+        <div class="u-main">
+            <div class="ucenter">
+                <div class="ucenter-info mt10">
+                    <div class="info-title">
+                        <h5>
+                            修改个人信息</h5>
+                    </div>
+    <table border="1px" cellpadding="10px" cellspacing="0px"
+           style="width: auto;margin:auto;">
+        <span class="red">{{ msg }}</span>
+         <form action="/User/update/" name="update_form" method="post"  enctype="multipart/form-data" onSubmit="return beforesubmit()">
+                {% csrf_token %}
+            <tr>
+                <th>昵称:</th>
+                <td><input type="text" class="txt txt2" name="number"></td>
+            </tr>
+             <tr>
+                    <th>性别:</th>
+                    <td>
+                        <input type="radio" name="sex"  value="男" >男
+                        <input type="radio" name="sex" value="女">女
+                    </td>
+             </tr>
+            <tr>
+                <th>系别:</th>
+                <td><input type="text" class="txt txt2" name="dept"></td>
+            </tr>
+             <tr>
+                <th>班级:</th>
+                <td><input type="text" class="txt txt2" name="classs"></td>
+            </tr>
+            <tr>
+                <th>联系方式:</th>
+                <td><input type="text" class="txt txt2" name="tel"></td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    <input type="submit" class="as" value="提交">
+                    <input type="reset" class="as" value="重置">
+                </th>
+            </tr>
+        </form>
+    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+        function beforesubmit() {
+            if(document.update_form.number.value==''){
+                alert("昵称不能为空");
+                return false;
+            }
+            if(document.update_form.sex.value==''){
+                alert("请选择性别");
+                return false;
+            }
+            if (document.update_form.dept.value==''){
+                alert('系别不能为空');
+                return false;
+            }
+            if (document.update_form.classs.value==''){
+                alert('班级不能为空');
+                return false;
+            }
+            if (document.update_form.tel.value==''){
+                alert('联系方式不能为空');
+                return false;
+            }
+            var res1=document.update_form.number.value;
+            var len1 = res1.length;
+            if(len1>20){
+                alert('用户名不能超过20个字符！');
+                return false;
+            }
+            var res2=document.update_form.dept.value;
+            var len2 = res2.length;
+            if(len2>20){
+                alert('系别不能超过20个字符！');
+                return false;
+            }
+            var res3=document.update_form.classs.value;
+            var len3 = res3.length;
+            if(len3>20){
+                alert('班级不能超过20个字符！');
+                return false;
+            }
+            var res4=document.update_form.tel.value;
+            var len4 = res4.length;
+            if(len4!==11){
+                alert('请输入正确的电话号码！');
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+{% endblock %}

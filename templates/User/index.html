@@ -1,0 +1,83 @@
+﻿{%  extends 'base.html' %}
+{% block css %}
+    <link href="../../static/User/css/UserCSS.css" rel="stylesheet" type="text/css" />
+    <link href="../../static/User/css/style.css" rel="stylesheet" type="text/css" />
+    <style>
+    .red{
+        text-align: center;
+        position: relative;
+        left: 120px;
+        color: red;
+    }
+    </style>
+{% endblock %}
+{% block js %}
+
+{% endblock %}
+{% block content %}
+<body>
+    <div class="row" style="margin-top: 10px;">
+    </div>
+    <div class="row">
+        <div class="u-menu">
+            <ul class="u-nav" id="user_menu">
+                <li class="item" id="user_menu_my" name="user_menu_my">
+                    <h3 class="t1">
+                        我的信息<span></span></h3>
+                    <ul class="sub">
+                        <li><a  href="/User">个人主页</a></li>
+                        <li><a  href="/User/update">信息管理</a> </li>
+                        <li><a  href="/Market/user_market">市场管理</a></li>
+                        <li><a  href="/Project/user_project">项目管理</a></li>
+                        <li><a  href="/Problem/user_problem">讨论管理</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.u-menu -->
+        <div class="u-main">
+            <div class="ucenter">
+                <div class="ucenter-info mt10">
+                    <div class="info-title">
+                        <h5>
+                            我的个人主页</h5>
+                    </div>
+                    <div class="info">
+                        <div class="info-main">
+                            <span class="red"><a href="/User/create">{{ msg }}</a></span>
+                            <div class="row">
+                                <label>
+                                    用户名：</label>{{ user_obj.number }}</div>
+                            <div class="row">
+                                <label>
+                                    学号：</label>{{username}}</div>
+                            <div class="row">
+                                <label>
+                                    性别：</label>{{user_obj.sex}}</div>
+                            <div class="row">
+                                <label>
+                                    系别：</label>{{user_obj.dept}}</div>
+                            <div class="row">
+                                <label>
+                                    班级：</label>{{user_obj.classs}}</div>
+                            <div class="row">
+                                <label>
+                                    联系方式：</label>{{user_obj.tel}}</div>
+
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                </div> 
+
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</body>
+{% endblock %}

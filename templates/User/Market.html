@@ -1,0 +1,194 @@
+﻿{%  extends 'base.html' %}
+{% block css %}
+    <link href="../../static/User/css/UserCSS.css" rel="stylesheet" type="text/css" />
+    <link href="../../static/User/css/style.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block js %}
+
+
+
+{% endblock %}
+{% block content %}
+<body>
+    <div class="row" style="margin-top: 10px;">
+    </div>
+    <div class="row">
+        <div class="u-menu">
+            <ul class="u-nav" id="user_menu">
+                <li class="item" id="user_menu_my" name="user_menu_my">
+                    <h3 class="t1">
+                        我的信息<span ></span></h3>
+                    <ul class="sub">
+                        <li><a  href="/User">个人主页</a></li>
+                        <li><a  href="/User/update">信息管理</a> </li>
+                        <li><a  href="/Market/user_market">市场管理</a></li>
+                        <li><a  href="/Project/user_project">项目管理</a></li>
+                        <li><a  href="/Problem/user_problem">讨论管理</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+
+        </div>
+        <!-- /.u-menu -->
+        <div class="u-main">
+            <div class="ucenter">
+                <div class="ucenter-info mt10">
+                    <div class="info-title">
+                        <h5>
+                            我的市场管理</h5>
+                    </div>
+    <table border="1px" cellpadding="10px" cellspacing="0px"
+            class="market_table">
+        <h4>商品上传</h4>
+         <form action="/Market/market_sub/" name="market_form" method="post"  enctype="multipart/form-data" onsubmit="return beforeSubmit()">
+                {% csrf_token %}
+            <tr>
+                <th>商品图片</th>
+                <td><input type="file" name="photo1" placeholder="商品图片" multiple="multiple"  accept=" image/jpeg, image/png, image/jpg" >
+                <input type="file" name="photo2" placeholder="商品图片" multiple="multiple"  accept=" image/jpeg, image/png, image/jpg" >
+                <input type="file" name="photo3" placeholder="商品图片" multiple="multiple"  accept=" image/jpeg, image/png, image/jpg" ></td></td>
+
+            </tr>
+            <tr>
+                <th>商品名称:</th>
+                <td><input type="text" class="txt txt2" name="title"></td>
+            </tr>
+            <tr>
+                <th>价格:</th>
+                <td><input type="text" class="txt txt2" name="prices"></td>
+            </tr>
+             <tr>
+                <th>使用时长</th>
+                <td><input type="text" class="txt txt2" name="time"></td>
+            </tr>
+            <tr>
+                <th>联系电话:</th>
+                <td><input type="text" class="txt txt2" name="tel" ></td>
+            </tr>
+            <tr>
+                    <th>类型:</th>
+                    <td>
+                        <input type="radio" name="category" value="日常用品">日常用品
+                        <input type="radio" name="category" value="体育用品">体育用品
+                        <input type="radio" name="category" value="电子产品">电子产品
+                        <input type="radio" name="category" value="学习用品">学习用品
+                        <input type="radio" name="category"  value="其他">其他
+                    </td>
+                </tr>
+            <tr>
+                <th>商品简介:</th>
+                <td><textarea name="content" rows="10" cols="50" class="txt1" placeholder="请输入描述信息！"></textarea></td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    <input type="submit" class="as" value="提交">
+                    <input type="reset" class="as" value="重置">
+                </th>
+            </tr>
+        </form>
+    </table>
+
+                    <div class="rightinfo">
+    <table class="tablelist">
+
+    	<thead>
+        我发布的商品:
+
+    	<tr>
+        <th>编号<i class="sort"></i></th>
+        <th>标题</th>
+        <th>类型</th>
+        <th>价格</th>
+        <th>发布时间</th>
+        <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for market in marketlist %}
+        <tr>
+        <td>{{ market.id }}</td>
+        <td>{{market.title}}</td>
+        <td>{{market.category}}</td>
+        <td>{{market.prices}}</td>
+        <td>{{market.created_at}}</td>
+        <td><a href="/Market/detail/{{ market.id }}" class="tablelink">查看</a>     <a href="/Market/delete/{{ market.id }}" class="tablelink"> 删除</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+<script>
+    function beforeSubmit(){
+            if(document.market_form.title.value==''){
+                alert('商品名不能为空！');
+                return false;
+            }
+            if(document.market_form.photo1.value==''){
+                alert('图片不能能空！');
+                return false;
+            }
+            if(document.market_form.photo2.value==''){
+                alert('图片不能能空！');
+                return false;
+            }
+            if(document.market_form.photo3.value==''){
+                alert('图片不能能空！');
+                return false;
+            }
+            if(document.market_form.prices.value==''){
+                alert('商品价格不能为空！');
+                return false;
+            }
+            if(document.market_form.time.value==''){
+                alert('商品时长不能为空！');
+                return false;
+            }
+            if(document.market_form.tel.value==''){
+                alert('联系方式不能为空！');
+                return false;
+            }
+            if(document.market_form.category.value==''){
+                alert('商品类型不能为空！');
+                return false;
+            }
+            if(document.market_form.content.value==''){
+                alert('商品描述不能为空！');
+                return false;
+            }
+            var res1=document.market_form.title.value;
+            var len1 = res1.length;
+            if(len1>35){
+                alert('商品标题不能超过35个字符！');
+                return false;
+            }
+            var res2=document.market_form.prices.value;
+            var len2 = res2.length;
+            if(len2>20){
+                alert('商品价格不能超过20个字符！');
+                return false;
+            }
+            var res3=document.market_form.time.value;
+            var len3 = res3.length;
+            if(len3>20){
+                alert('商品时间不能超过20个字符！');
+                return false;
+            }
+            var res4=document.market_form.tel.value;
+            var len4 = res4.length;
+            if(len4!==11){
+                alert('请输入正确的电话号码');
+                return false;
+            }
+            return true;
+        }
+</script>
+
+</body>
+{% endblock %}

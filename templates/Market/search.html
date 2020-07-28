@@ -1,0 +1,121 @@
+
+{% extends 'base.html' %}
+
+
+        {% block css %}
+		<link rel="shortcut icon" href="../../static/Market/images/favicon.ico">
+		<link rel="stylesheet" href="../../static/Market/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../static/Market/css/bootstrap-slider.min.css">
+         <link rel="stylesheet" href="../../static/Market/css/style.css">
+        {% endblock %}
+        {% block js %}
+		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+
+		<script src="../../static/Market/js/bootstrap-slider.min.js"></script>
+
+       {% endblock %}
+{% block content %}
+	<body>
+	    <section class="cta text-center">
+			<div class="container">
+				<h3 class="mt-0 mb-4" id="top">搜索你需要的商品</h3>
+				<form class="subscribe" method="get" action="/Market/search/">
+                    {% csrf_token %}
+					<div class="form-group row pt-3">
+						<div class="col-sm-8 mb-3">
+							<input type="search" class="form-control" name="q" placeholder="商品关键字">
+						</div>
+						<div class="col-sm-4">
+							<button type="submit" class="btn btn-lg btn-outline-primary">搜索</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-lg-3 sidebar-filter">
+					<h3 class="mt-5 mb-5">二手市场</h3>
+					<h6 class="text-uppercase">分类</h6>
+					<div class="filter-checkbox">
+						<div class="custom-control custom-checkbox">
+							<li><a href="/Market/category/2">日常用品<span> </span></a></li>
+						</div>
+					</div>
+					<div class="filter-checkbox">
+						<div class="custom-control custom-checkbox">
+							<li><a href="/Market/category/3">体育用品 <span></span></a></li>
+						</div>
+					</div>
+					<div class="filter-checkbox">
+						<div class="custom-control custom-checkbox">
+							<li><a href="/Market/category/4">电子产品 <span></span></a></li>
+						</div>
+					</div>
+					<div class="filter-checkbox">
+						<div class="custom-control custom-checkbox">
+							<li><a href="/Market/category/5">学习用品 <span></span></a></li>
+						</div>
+					</div>
+					<div class="filter-checkbox">
+						<div class="custom-control custom-checkbox">
+							<li><a href="/Market/category/6">其他商品 <span></span></a></li>
+						</div>
+					</div>
+					<div class="divider"></div></div>
+
+				<div class="col-md-8 col-lg-9">
+					<section class="products">
+						<div class="container">
+
+							<div class="row">
+                                {{ error_msg }}
+                                {% for market in post_list %}
+								<div class="col-md-6 col-lg-4 col-product">
+									<figure>
+										<a href="/Market/detail/{{ market.id }}"> <img class="rounded-corners img-fluid" src="{{ MEDIA_URL }}{{ market.photo1 }}" ></a>
+									</figure>
+									<h4 class="mb-1"><a href="/Market/detail/{{ market.id }}">{{ market.title }}</a></h4>
+									<p><span class="emphasis">${{ market.prices }}</span></p>
+								</div>
+                                {% endfor %}
+							</div>
+							<div class="row sorting mb-5">
+								<div class="col-12"><a class="btn" href="#top"><i class="fas fa-arrow-up mr-2"></i>返回顶部</a>
+
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+		</div>
+
+		<div class="divider"></div>
+
+
+
+
+
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="../../static/Market/js/jquery-3.1.1.min.js"></script>
+		<script src="../../static/Market/bootstrap/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+
+		<script type="text/javascript">
+			// Without JQuery
+			var slider = new Slider('#ex2', {
+			});
+			slider.on("slide", function(sliderValue) {
+			document.getElementById("price-min").value = sliderValue[0];
+			});
+			slider.on("slide", function(sliderValue) {
+			document.getElementById("price-max").value = sliderValue[1];
+			});
+
+		</script>
+
+	</body>
+  {% endblock  %}

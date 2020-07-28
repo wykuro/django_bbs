@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<link href="../../static/Problem/css/base.css" rel="stylesheet">
+<link href="../../static/Problem/css/index.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<body>
+<article>
+  <h2 class="title_tj">
+    <p>讨论<span>列表</span></p>
+  </h2>
+
+  <div class="bloglist left">
+   {% for pro in  pro_list %}
+    <h3>{{pro.title}}</h3>
+    <ul>
+      <a  href="/Problem/detail/{{ pro.id }}" target="_blank" class="readmore">阅读全文>></a>
+    </ul>
+    <p class="dateview"><span>发布时间:{{pro.created_at}}</span><span>作者：{{pro.author}}</span></p>
+  <hr/>
+  {% endfor %}
+  </div>
+
+  <aside class="right">
+    <div class="news">
+    <h3>
+      <p>最新<span>发布</span></p>
+    </h3>
+    <ul class="paih">
+        {% for pro in pro_list2  %}
+      <li><a href="/Problem/detail/{{ pro.id }}"  target="_blank">{{ pro.title }}</a></li>
+        {% endfor %}
+    </ul>
+    <h3 class="ph">
+      <p>点击<span>排行</span></p>
+    </h3>
+    <ul class="paih">
+       {% for pro in pro_list3  %}
+      <li><a href="/Problem/detail/{{ pro.id }}"  target="_blank">{{ pro.title }}</a></li>
+        {% endfor %}
+    </ul>
+    </div>
+
+    </aside>
+</article>
+
+<script src="../../static/Problem/js/silder.js"></script>
+</body>
+{% endblock %}

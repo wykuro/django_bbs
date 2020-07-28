@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+     <link rel="stylesheet" href="/static/Login/bootstrap.min.css">
+    <style>
+        .red{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="register-page">
+        <span class="register_form">
+            <h1>
+                <span>注册页面</span>
+            </h1>
+            <form action="/User/register/" name="register_form" method="post"  enctype="multipart/form-data" onsubmit="return beforeSubmit()">
+                {% csrf_token %}
+                <p>学号:<input type="text" class="form-control" name="username"></p>
+                <p>密码:<input type="password" class="form-control" name="password1"></p>
+                <p>确认密码:<input type="password" class="form-control" name="password2"></p>
+                <span class="red">{{ msg }}</span>
+                <button type="submit" >提交</button>
+            </form>
+        </span>
+    </div>
+        <script>
+            <!--检查输入-->
+        function beforeSubmit(){
+            if(document.register_form.username.value==''){
+                alert('用户名不能为空！');
+                return false;
+            }
+            if(document.register_form.password1.value==''){
+                alert('密码不能为空！');
+                return false;
+            }
+            if(document.register_form.password2.value==''){
+                alert('密码不能为空！');
+                return false;
+            }
+            if(document.register_form.password1.value!=document.register_form.password2.value){
+                alert('两次输入的密码不同');
+                return false;
+            }
+            return true;
+        }
+        </script>
+
+</body>
+</html>

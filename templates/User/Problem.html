@@ -1,0 +1,109 @@
+﻿{%  extends 'base.html' %}
+{% block css %}
+    <link href="../../static/User/css/UserCSS.css" rel="stylesheet" type="text/css" />
+    <link href="../../static/User/css/style.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block js %}
+
+
+{% endblock %}
+{% block content %}
+<body>
+    <div class="row" style="margin-top: 10px;">
+    </div>
+    <div class="row">
+        <div class="u-menu">
+            <ul class="u-nav" id="user_menu">
+                <li class="item" id="user_menu_my" name="user_menu_my">
+                    <h3 class="t1">
+                        我的信息<span ></span></h3>
+                   <ul class="sub">
+                        <li><a  href="/User">个人主页</a></li>
+                        <li><a  href="/User/update">信息管理</a> </li>
+                        <li><a  href="/Market/user_market">市场管理</a></li>
+                        <li><a  href="/Project/user_project">项目管理</a></li>
+                        <li><a  href="/Problem/user_problem">讨论管理</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+
+        </div>
+        <!-- /.u-menu -->
+        <div class="u-main">
+            <div class="ucenter">
+                <div class="ucenter-info mt10">
+                    <div class="info-title">
+                        <h5>
+                            我的讨论管理</h5>
+                    </div>
+    <table border="1px" cellpadding="10px" cellspacing="0px"
+           style="width: auto;margin:auto;">
+        <caption><h4>讨论上传</h4></caption>
+         <form action="/Problem/problem_sub/"  method="post" name="problem_form" enctype="multipart/form-data" onsubmit="return beforeSubmit()">
+                {% csrf_token %}
+            <tr>
+                <th>标题:</th>
+                <td><input type="text" class="txt txt2" name="title"></td>
+            </tr>
+            <tr>
+                <th>内容:</th>
+                <td><textarea name="content" rows="10" cols="50" class="txt1" placeholder="请输入描述信息！"></textarea></td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    <input type="submit" class="as" value="提交">
+                    <input type="reset" class="as" value="重置">
+                </th>
+            </tr>
+        </form>
+    </table>
+                    <div class="rightinfo">
+    <table class="tablelist">
+
+    	<thead>
+        我发布的问题:
+
+    	<tr>
+        <th>编号<i class="sort"></i></th>
+        <th>标题</th>
+        <th>发布时间</th>
+        <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for problem in problemlist %}
+        <tr>
+        <td>{{ problem.id }}</td>
+        <td>{{problem.title}}</td>
+        <td>{{problem.created_at}}</td>
+        <td><a href="/Problem/detail/{{ problem.id }}" class="tablelink">查看</a>     <a href="/Problem/delete/{{ problem.id }}" class="tablelink"> 删除</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function beforeSubmit(){
+            if(document.problem_form.title.value==''){
+                alert('标题不能为空！');
+                return false;
+            }
+            if(document.problem_form.content.value==''){
+                alert('内容不能为空！');
+                return false;
+            }
+            var res1=document.problem_form.title.value;
+            var len1 = res1.length;
+            if(len1>35){
+                alert('标题不能超过35个字符！');
+                return false;
+            }
+        }
+    </script>
+</body>
+{% endblock %}
